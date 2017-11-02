@@ -2,15 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
+export default class BookDetails extends React.Component {
 
-const MainNavigator = StackNavigator({
-  BookDetails: {screen: BookDetails}
-})
 
-export default class App extends React.Component {
 
   render() {
-    return <BookList />;
+    return (
+      <View style={styles.container}>
+        
+      </View>
+    );
   }
 }
 
@@ -19,6 +20,5 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'center',
-    padding: 1,
   },
 });

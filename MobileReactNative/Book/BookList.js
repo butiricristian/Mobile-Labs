@@ -15,7 +15,7 @@ export class BookList extends React.Component {
   renderRow(record){
     return (
       <View>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('BookDetails', {book: record})}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('BookDetails', {book: record, updateState: this.updateState.bind(this)})}>
           <View style={{flexDirection: 'row', padding: 10}}>
             <View stle={{flex: 1}}>
               <Text>{record.title}</Text>
@@ -27,6 +27,11 @@ export class BookList extends React.Component {
         </TouchableOpacity>
       </View>
     );
+  }
+
+  updateState(){
+    console.log("UPDATE STATE");
+    this.state.setState({ds: global.ds.cloneWithRows(global.bookList)});
   }
 
   render() {

@@ -21,6 +21,10 @@
             android:name=".book_details.BookDetailsActivity"
             android:label="@string/title_activity_book_details"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".book_details.AddBookActivity"
+            android:label="@string/title_activity_add_book"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

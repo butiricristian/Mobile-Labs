@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import { BookList } from './Book/BookList'
 import { LogIn } from './LogIn/LogIn'
 import { BookDetails } from './Book/BookDetails'
+import { BookNew } from './Book/BookNew'
 
 
 const MainNavigator = StackNavigator({
@@ -14,6 +15,7 @@ const SimpleAppNavigator = StackNavigator({
   Home: {screen: LogIn},
   BookList: {screen: BookList},
   BookDetails: {screen: BookDetails},
+  BookNew: {screen: BookNew}
 });
 
 const AppNavigation = () => (
@@ -26,36 +28,14 @@ global.bookList = [
     author: 'J.K. Rowling',
     nrPages: '349',
     ISBN: '213124323',
-    quotes: [
-      {
-        text: 'You know nothing Harry Potter',
-        addedAt: '05-11-2017'
-      }
-    ]
+    endDate: new Date()
   },
   {
     title: 'Harry Potter 2',
     author: 'J.K. Rowling',
     nrPages: '453',
     ISBN: '1232453342',
-    quotes: [
-      {
-        text: 'You must be Harry Potter',
-        addedAt: '05-11-2017'
-      }
-    ]
-  },
-  {
-    title: 'The Pragmatic Programmer',
-    author: 'Multiple',
-    nrPages: '349',
-    ISBN: '213124323',
-    quotes: [
-      {
-        text: 'Clean code',
-        addedAt: '05-11-2017'
-      }
-    ]
+    endDate: new Date()
   }
 ];
 global.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});

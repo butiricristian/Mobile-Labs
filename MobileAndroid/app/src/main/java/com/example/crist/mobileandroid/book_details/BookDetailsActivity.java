@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
     TextView nrPages;
     TextView endDate;
     BarChart barChart;
+    Button removeBtn;
 
 
     @Override
@@ -50,6 +52,7 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         nrPages = (TextView) findViewById(R.id.details_nr_pages);
         endDate = (TextView) findViewById(R.id.details_end_date);
         barChart = (BarChart) findViewById(R.id.details_chart);
+        removeBtn = (Button) findViewById((R.id.remove_btn));
 
         final Long id = this.getIntent().getLongExtra("EXTRA_ID", 1L);
         title.setText(this.getIntent().getStringExtra("EXTRA_TITLE"));
@@ -67,6 +70,21 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onClick(View view) {
                 bookDao.update(new Book(
+                        id,
+                        title.getText().toString(),
+                        author.getText().toString(),
+                        isbn.getText().toString(),
+                        Integer.valueOf(nrPages.getText().toString()),
+                        endDate.getText().toString())
+                );
+                finish();
+            }
+        });
+
+        removeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bookDao.delete(new Book(
                         id,
                         title.getText().toString(),
                         author.getText().toString(),

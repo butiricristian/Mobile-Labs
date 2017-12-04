@@ -25,5 +25,5 @@ public interface BookDao {
     void update(Book... b);
 
     @Delete
-    void delete(Book... id);
+    void delete(Book... b);
 }

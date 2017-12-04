@@ -70,6 +70,7 @@ public class BookListActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent = new Intent(this, BookDetailsActivity.class);
+        intent.putExtra("EXTRA_ID", books.get(i).getId());
         intent.putExtra("EXTRA_TITLE", books.get(i).getTitle());
         intent.putExtra("EXTRA_AUTHOR", books.get(i).getAuthor());
         intent.putExtra("EXTRA_ISBN", books.get(i).getISBN());

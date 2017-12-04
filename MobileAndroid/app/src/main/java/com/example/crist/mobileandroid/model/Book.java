@@ -8,9 +8,6 @@ import android.arch.persistence.room.TypeConverters;
 
 import java.util.Date;
 
-/**
- * Created by crist on 02-Nov-17.
- */
 @Entity
 public class Book {
     @PrimaryKey(autoGenerate = true)
@@ -85,5 +82,31 @@ public class Book {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        if (id != null ? !id.equals(book.id) : book.id != null) return false;
+        if (title != null ? !title.equals(book.title) : book.title != null) return false;
+        if (author != null ? !author.equals(book.author) : book.author != null) return false;
+        if (ISBN != null ? !ISBN.equals(book.ISBN) : book.ISBN != null) return false;
+        if (nrPages != null ? !nrPages.equals(book.nrPages) : book.nrPages != null) return false;
+        return endDate != null ? endDate.equals(book.endDate) : book.endDate == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + (ISBN != null ? ISBN.hashCode() : 0);
+        result = 31 * result + (nrPages != null ? nrPages.hashCode() : 0);
+        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
+        return result;
     }
 }

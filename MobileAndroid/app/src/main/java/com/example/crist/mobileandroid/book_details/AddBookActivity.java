@@ -14,6 +14,9 @@ import com.example.crist.mobileandroid.R;
 import com.example.crist.mobileandroid.database.BookDao;
 import com.example.crist.mobileandroid.database.DatabaseProvider;
 import com.example.crist.mobileandroid.model.Book;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Date;
 import java.util.Calendar;
@@ -27,6 +30,9 @@ public class AddBookActivity extends AppCompatActivity implements DatePickerDial
     EditText isbn;
     EditText nrPages;
     EditText endDate;
+
+    DatabaseReference dbRef;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,18 +51,25 @@ public class AddBookActivity extends AppCompatActivity implements DatePickerDial
 
         bookDao = DatabaseProvider.getDatabaseInstance(getApplicationContext()).getBookDao();
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        dbRef = FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth.getCurrentUser().getUid()).child("books");
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            bookDao.save(new Book(
-                    title.getText().toString(),
-                    author.getText().toString(),
-                    isbn.getText().toString(),
-                    Integer.valueOf(nrPages.getText().toString()),
-                    endDate.getText().toString())
-            );
-            finish();
+                Book newBook = new Book(
+                        title.getText().toString(),
+                        author.getText().toString(),
+                        isbn.getText().toString(),
+                        Integer.valueOf(nrPages.getText().toString()),
+                        endDate.getText().toString(),
+                        firebaseAuth.getCurrentUser().getUid()
+                        );
+                bookDao.save(newBook);
+                dbRef.child(isbn.getText().toString()).setValue(newBook);
+                finish();
             }
         });
     }

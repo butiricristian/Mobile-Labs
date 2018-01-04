@@ -13,6 +13,12 @@ export class BookDetails extends React.Component {
       nrPages: this.props.navigation.state.params.book.nrPages,
       endDate: this.props.navigation.state.params.book.endDate
     }
+    this.auth = global.firebaseApp.auth();
+    this.auth.onAuthStateChanged((user) => {
+      if(user){
+        this.dbRef = global.firebaseApp.database().ref().child('users').child(user.uid).child('books')
+      }
+    })
   }
 
 
@@ -77,7 +83,7 @@ export class BookDetails extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{flexDirection: 'column', flex: 0.2, width: '80%'}}>
-          <Text>{this.props.navigation.state.params.book.ISBN}</Text>
+          <Text>{this.props.navigation.state.params.book.isbn}</Text>
           <TextInput value={this.state.title} onChangeText={(title) => this.setState({title})} />
           <TextInput value={this.state.author} onChangeText={(author) => this.setState({author})} />
           <TextInput value={this.state.nrPages} onChangeText={(nrPages) => this.setState({nrPages})} />
@@ -87,21 +93,21 @@ export class BookDetails extends React.Component {
               onDateChange={(date) => {this.setState({endDate: date})}}
           />
           <Button title="SAVE" onPress={() => {
-              AsyncStorage.mergeItem(this.props.navigation.state.params.book.ISBN, JSON.stringify({
-                title: this.state.title,
-                author: this.state.author,
-                nrPages: this.state.nrPages,
+            this.dbRef.child(this.props.navigation.state.params.book.isbn).set({
+                isbn: this.props.navigation.state.params.book.isbn, 
+                title: this.state.title, 
+                author: this.state.author, 
+                nrPages: this.state.nrPages, 
                 endDate: this.state.endDate
-              })
-              ).then(() => {
+            }).then(() => {
                 this.props.navigation.state.params.updateState();
                 this.props.navigation.goBack();
-              })
+            });
             }
           }
           />
           <Button title="REMOVE" color='#FF0000' onPress={() => {
-              AsyncStorage.removeItem(this.props.navigation.state.params.book.ISBN).then(() => {
+              this.dbRef.child(this.props.navigation.state.params.book.isbn).remove().then(() => {
                 this.props.navigation.state.params.updateState();
                 this.props.navigation.goBack();
               });

@@ -3,4 +3,5 @@
     <string name="title_activity_book_details">BookDetailsActivity</string>
     <string name="book_row_image_description">Book cover</string>
     <string name="title_activity_add_book">AddBookActivity</string>
+    <string name="title_activity_sign_up">SignUp</string>
 </resources>

@@ -5,34 +5,27 @@ import { BookDetails } from './BookDetails';
 
 export class BookList extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      ds: global.ds.cloneWithRows([])
+      ds: global.ds.cloneWithRows([]),
+      uid: this.props.navigation.state.params.uid
     }
-    AsyncStorage.getAllKeys().then((keys) => {
-      bookList = [];
-      for(keyIndex in keys){
-        AsyncStorage.getItem(keys[keyIndex]).then((value) => {
-          bookList.push(JSON.parse(value))
-          this.setState({ds: global.ds.cloneWithRows(bookList)});
-        });
-      }
-    });
+    this.ref = global.firebaseApp.database().ref().child('users').child(this.state.uid).child('books');
+    this.auth = global.firebaseApp.auth();
+    this.updateState();
   }
 
   
   updateState(){
-    AsyncStorage.getAllKeys().then((keys) => {
-      bookList = [];
-      for(keyIndex in keys){
-        AsyncStorage.getItem(keys[keyIndex]).then((value) => {
-          bookList.push(JSON.parse(value));
-          this.setState({ds: global.ds.cloneWithRows(bookList)});
-        })
-      }
-
-    });
+    this.ref.on('value', (snap) => {
+      var bookList = [];
+      snap.forEach(element => {
+        bookList.push(element.val())
+      });
+      console.log(bookList);
+      this.setState({ds: global.ds.cloneWithRows(bookList)});
+    })
   }
 
   renderRow(record){
@@ -60,6 +53,10 @@ export class BookList extends React.Component {
           renderRow={this.renderRow.bind(this)}
         />
         <Button title="ADD" onPress={() => this.props.navigation.navigate('BookNew', {updateState: this.updateState.bind(this)})}/>
+        <Button title="LOG OUT" onPress={() => {
+          this.auth.signOut()
+          this.props.navigation.goBack();
+        }}/>
       </View>
     );
   }

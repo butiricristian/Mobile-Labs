@@ -18,6 +18,9 @@ public interface BookDao {
     @Query("SELECT * FROM Book")
     List<Book> findAll();
 
+    @Query("SELECT * FROM Book WHERE ISBN = :isbn")
+    Book findOne(String isbn);
+
     @Insert
     void save(Book... b);
 
@@ -26,4 +29,7 @@ public interface BookDao {
 
     @Delete
     void delete(Book... b);
+
+    @Query("DELETE FROM Book")
+    void deleteAll();
 }

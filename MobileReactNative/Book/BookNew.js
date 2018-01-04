@@ -14,6 +14,12 @@ export class BookNew extends React.Component {
         nrPages: "",
         endDate: new Date()
     }
+    this.auth = global.firebaseApp.auth();
+    this.auth.onAuthStateChanged((user) => {
+      if(user){
+        this.dbRef = global.firebaseApp.database().ref().child('users').child(user.uid).child('books')
+      }
+    })
   }
 
   render() {
@@ -30,13 +36,13 @@ export class BookNew extends React.Component {
               onDateChange={(date) => {this.setState({endDate: date})}}
           />
           <Button title="SAVE" onPress={() => {
-                AsyncStorage.setItem(this.state.isbn, JSON.stringify({
-                    ISBN: this.state.isbn, 
+                this.dbRef.child(this.state.isbn).set({
+                    isbn: this.state.isbn, 
                     title: this.state.title, 
                     author: this.state.author, 
                     nrPages: this.state.nrPages, 
                     endDate: this.state.endDate
-                })).then(() => {
+                }).then(() => {
                     this.props.navigation.state.params.updateState();
                     this.props.navigation.goBack();
                 });

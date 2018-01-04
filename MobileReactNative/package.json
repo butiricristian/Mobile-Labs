@@ -20,11 +20,13 @@
   },
   "dependencies": {
     "expo": "^21.0.0",
+    "firebase": "^4.8.1",
     "react": "16.0.0-alpha.12",
     "react-native": "^0.48.4",
     "react-native-charts-wrapper": "^0.3.1",
     "react-native-datepicker": "^1.6.0",
     "react-native-pathjs-charts": "0.0.33",
+    "react-native-push-notification": "^3.0.2",
     "react-native-svg": "^6.0.1-rc.1",
     "react-native-swipeable": "^0.6.0",
     "react-navigation": "^1.0.0-beta.16",

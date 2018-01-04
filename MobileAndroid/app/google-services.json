@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "840579237111",
+    "firebase_url": "https://mobileapp-5f098.firebaseio.com",
+    "project_id": "mobileapp-5f098",
+    "storage_bucket": "mobileapp-5f098.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840579237111:android:bd2a4a185ce9bfda",
+        "android_client_info": {
+          "package_name": "com.example.crist.mobileandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840579237111-cetnel5up7t1c8oo12pahfiko2rh8hnt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGR2fBXKj4ftMg0KveMnOYS8junmeQWlw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

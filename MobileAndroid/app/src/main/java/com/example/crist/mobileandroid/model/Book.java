@@ -17,23 +17,30 @@ public class Book {
     private String ISBN;
     private Integer nrPages;
     private String endDate;
+    private String user_id;
 
-    public Book(Long id, String title, String author, String ISBN, Integer nrPages, String endDate) {
+    public Book(Long id, String title, String author, String ISBN, Integer nrPages, String endDate, String user_id) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.ISBN = ISBN;
         this.nrPages = nrPages;
         this.endDate = endDate;
+        this.user_id = user_id;
     }
 
     @Ignore
-    public Book(String title, String author, String ISBN, Integer nrPages, String endDate) {
+    public Book(){
+    }
+
+    @Ignore
+    public Book(String title, String author, String ISBN, Integer nrPages, String endDate, String user_id) {
         this.title = title;
         this.author = author;
         this.ISBN = ISBN;
         this.nrPages = nrPages;
         this.endDate = endDate;
+        this.user_id = user_id;
     }
 
     public Long getId() {
@@ -82,6 +89,14 @@ public class Book {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     @Override

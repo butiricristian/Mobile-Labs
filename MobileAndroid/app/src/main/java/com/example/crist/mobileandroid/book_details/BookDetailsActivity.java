@@ -18,6 +18,9 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
 import java.util.ArrayList;
@@ -37,6 +40,9 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
     TextView endDate;
     BarChart barChart;
     Button removeBtn;
+
+    DatabaseReference dbRef;
+    FirebaseAuth firebaseAuth;
 
 
     @Override
@@ -65,18 +71,24 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
 
         bookDao = DatabaseProvider.getDatabaseInstance(getApplicationContext()).getBookDao();
 
+        dbRef = FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth.getCurrentUser().getUid()).child("books");
+        firebaseAuth = FirebaseAuth.getInstance();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bookDao.update(new Book(
+                Book newBook = new Book(
                         id,
                         title.getText().toString(),
                         author.getText().toString(),
                         isbn.getText().toString(),
                         Integer.valueOf(nrPages.getText().toString()),
-                        endDate.getText().toString())
+                        endDate.getText().toString(),
+                        firebaseAuth.getCurrentUser().getUid()
                 );
+                bookDao.update(newBook);
+                dbRef.child(isbn.getText().toString()).setValue(newBook);
                 finish();
             }
         });
@@ -90,8 +102,10 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
                         author.getText().toString(),
                         isbn.getText().toString(),
                         Integer.valueOf(nrPages.getText().toString()),
-                        endDate.getText().toString())
+                        endDate.getText().toString(),
+                        firebaseAuth.getCurrentUser().getUid())
                 );
+                dbRef.child(isbn.getText().toString()).removeValue();
                 finish();
             }
         });

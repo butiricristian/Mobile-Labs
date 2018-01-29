@@ -31,7 +31,8 @@ const firebaseConfig = {
   authDomain: "mobileapp-5f098.firebaseapp.com",
   databaseURL: "https://mobileapp-5f098.firebaseio.com/",
   storageBucket: "mobileapp-5f098.appspot.com",
-  messagingSenderId: "840579237111"
+  messagingSenderId: "840579237111",
+  persistence: true
 };
 global.firebaseApp = firebase.initializeApp(firebaseConfig);
 
@@ -55,19 +56,19 @@ global.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 export default class App extends React.Component{
 
-  notifications(){
-    // const messaging = firebase.messaging();
-    // messaging.requestPermission()
-      // .then(() => {
-      //   console.log("Notification")
-      // })
-      // .catch((err) => {
-      //   console.log('Unable to get permission to notify.', err);
-      // });
-  }
+  // notifications(){
+  //   const messaging = firebase.messaging();
+  //   messaging.requestPermission()
+  //     .then(() => {
+  //       console.log("Notification")
+  //     })
+  //     .catch((err) => {
+  //       console.log('Unable to get permission to notify.', err);
+  //     });
+  // }
 
   render() {
-    this.notifications();
+    // this.notifications();
     return (
       <AppNavigation style={styles.container}/>
     );

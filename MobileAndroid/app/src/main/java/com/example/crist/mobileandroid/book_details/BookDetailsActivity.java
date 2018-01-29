@@ -71,8 +71,8 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
 
         bookDao = DatabaseProvider.getDatabaseInstance(getApplicationContext()).getBookDao();
 
-        dbRef = FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth.getCurrentUser().getUid()).child("books");
         firebaseAuth = FirebaseAuth.getInstance();
+        dbRef = FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth.getCurrentUser().getUid()).child("books");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

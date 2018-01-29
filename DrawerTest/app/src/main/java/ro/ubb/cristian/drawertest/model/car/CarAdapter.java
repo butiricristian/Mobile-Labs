@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(CarViewHolder holder, int position) {
+    public void onBindViewHolder(CarViewHolder holder, final int position) {
         final Car car = cars.get(position);
         holder.textViewCarName.setText(car.getName());
         holder.textViewCarQuantity.setText("Quantity: " + car.getQuantity().toString());
@@ -81,6 +82,9 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
                 Snackbar.make(view, "Not yet implemented", 1000).show();
             }
         });
+
+
+
     }
 
     @Override

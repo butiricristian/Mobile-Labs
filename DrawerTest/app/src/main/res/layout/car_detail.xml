@@ -58,7 +58,19 @@
             android:inputType="text"
             android:hint="Car Status"
             android:padding="16dp"/>
+
     </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/remove_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Button"
+        android:background="@color/colorRemove"
+        android:textColor="@color/colorWhite"
+        />"
+
 
     <!--<TextView-->
         <!--android:id="@+id/details_car_name_text"-->

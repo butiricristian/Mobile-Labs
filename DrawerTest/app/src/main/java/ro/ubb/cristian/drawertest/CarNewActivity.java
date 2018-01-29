@@ -23,23 +23,11 @@ public class CarNewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_car_detail);
+        setContentView(R.layout.activity_car_new);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
         currentCar = new Car();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //This will be the save button
-                finish();
-                Snackbar.make(view, currentCar.getName(), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -53,7 +41,7 @@ public class CarNewActivity extends AppCompatActivity {
             CarNewFragment fragment = new CarNewFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.car_detail_container, fragment)
+                    .add(R.id.car_new_container, fragment)
                     .commit();
         }
     }

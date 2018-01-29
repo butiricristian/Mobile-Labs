@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/details_car_name"
+            android:id="@+id/new_car_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/details_car_quantity"
+            android:id="@+id/new_car_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/details_car_type"
+            android:id="@+id/new_car_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/details_car_status"
+            android:id="@+id/new_car_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -61,25 +61,25 @@
     </android.support.design.widget.TextInputLayout>
 
     <!--<TextView-->
-        <!--android:id="@+id/details_car_name_text"-->
+        <!--android:id="@+id/new_car_name_text"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:padding="16dp"/>-->
 
     <!--<TextView-->
-        <!--android:id="@+id/details_car_type_text"-->
+        <!--android:id="@+id/new_car_type_text"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:padding="16dp"/>-->
 
     <!--<TextView-->
-        <!--android:id="@+id/details_car_quantity_text"-->
+        <!--android:id="@+id/new_car_quantity_text"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:padding="16dp"/>-->
 
     <!--<TextView-->
-        <!--android:id="@+id/details_car_status_text"-->
+        <!--android:id="@+id/new_car_status_text"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:padding="16dp"/>-->

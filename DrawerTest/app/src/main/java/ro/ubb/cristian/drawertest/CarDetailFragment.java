@@ -9,9 +9,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import ro.ubb.cristian.drawertest.controller.CarController;
 import ro.ubb.cristian.drawertest.dummy.DummyContent;
 import ro.ubb.cristian.drawertest.model.car.Car;
 
@@ -54,12 +56,21 @@ public class CarDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.car_detail, container, false);
+        final CarController carController = new CarController();
 
         if (car != null) {
             ((EditText) rootView.findViewById(R.id.details_car_name)).setText(car.getName());
             ((EditText) rootView.findViewById(R.id.details_car_quantity)).setText(car.getQuantity().toString());
             ((EditText) rootView.findViewById(R.id.details_car_type)).setText(car.getType());
             ((EditText) rootView.findViewById(R.id.details_car_status)).setText(car.getStatus());
+
+            ((Button) rootView.findViewById(R.id.remove_button)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    carController.deleteCar(car.getId());
+                    getActivity().finish();
+                }
+            });
 
 //            ((TextView) rootView.findViewById(R.id.details_car_name_text)).setText(car.getName());
 //            ((TextView) rootView.findViewById(R.id.details_car_quantity_text)).setText(car.getQuantity().toString());

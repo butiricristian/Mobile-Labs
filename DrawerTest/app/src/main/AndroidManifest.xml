@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CarDetailActivity"
+            android:name=".employee.CarDetailActivity"
             android:label="@string/title_car_detail"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -31,7 +31,7 @@
                 android:value="ro.ubb.cristian.drawertest.MainActivity" />
         </activity>
         <activity
-            android:name=".CarNewActivity"
+            android:name=".employee.CarNewActivity"
             android:label="@string/title_car_new"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

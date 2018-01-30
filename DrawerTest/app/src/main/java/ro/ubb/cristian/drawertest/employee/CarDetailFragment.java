@@ -1,4 +1,4 @@
-package ro.ubb.cristian.drawertest;
+package ro.ubb.cristian.drawertest.employee;
 
 import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +14,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import ro.ubb.cristian.drawertest.R;
 import ro.ubb.cristian.drawertest.controller.CarController;
-import ro.ubb.cristian.drawertest.dummy.DummyContent;
 import ro.ubb.cristian.drawertest.model.car.Car;
+import ro.ubb.cristian.drawertest.repository.CarRepository;
 
 public class CarDetailFragment extends Fragment {
 
     public static final String CAR = "car";
     private Car car;
+    private CarController carController;
 
     public CarDetailFragment() {
     }
@@ -31,6 +37,8 @@ public class CarDetailFragment extends Fragment {
 
         if (getArguments().containsKey(CAR)) {
             car = (Car)getArguments().getSerializable(CAR);
+            CarRepository carRepository = (CarRepository) getArguments().getSerializable("repository");
+            carController = new CarController(carRepository, getView());
 
             final Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
@@ -55,8 +63,9 @@ public class CarDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.car_detail, container, false);
-        final CarController carController = new CarController();
+        final View rootView = inflater.inflate(R.layout.car_detail, container, false);
+
+
 
         if (car != null) {
             ((EditText) rootView.findViewById(R.id.details_car_name)).setText(car.getName());
@@ -67,8 +76,19 @@ public class CarDetailFragment extends Fragment {
             ((Button) rootView.findViewById(R.id.remove_button)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    carController.deleteCar(car.getId());
-                    getActivity().finish();
+                    carController.deleteCar(car).enqueue(new Callback<Car>() {
+                        @Override
+                        public void onResponse(Call<Car> call, Response<Car> response) {
+                            Log.d("Delete: ", "Successful");
+                            getActivity().finish();
+                        }
+
+                        @Override
+                        public void onFailure(Call<Car> call, Throwable t) {
+                            Snackbar.make(getActivity().findViewById(R.id.parent_layout), car.getName(), Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }
+                    });
                 }
             });
 

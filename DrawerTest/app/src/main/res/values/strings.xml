@@ -8,4 +8,12 @@
     <string name="title_car_list">Cars</string>
     <string name="title_car_detail">Car Detail</string>
     <string name="title_car_new">New Car</string>
+    <string name="car_name">Car name</string>
+    <string name="car_quantity">Car quantity</string>
+    <string name="car_type">Car type</string>
+    <string name="car_status">Car status</string>
+    <string name="buy">Buy</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

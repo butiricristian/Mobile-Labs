@@ -1,4 +1,4 @@
-package ro.ubb.cristian.drawertest;
+package ro.ubb.cristian.drawertest.employee;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -16,8 +16,10 @@ import android.widget.EditText;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ro.ubb.cristian.drawertest.R;
 import ro.ubb.cristian.drawertest.controller.CarController;
 import ro.ubb.cristian.drawertest.model.car.Car;
+import ro.ubb.cristian.drawertest.repository.CarRepository;
 
 /**
  * Created by crist on 29-Jan-18.
@@ -28,6 +30,7 @@ public class CarNewFragment extends Fragment {
     public static final String CAR = "car";
     private Car currentCar;
     EditText etCarName, etCarType, etCarQuantity, etCarStatus;
+    CarController carController;
 
     public CarNewFragment() {
     }
@@ -35,6 +38,9 @@ public class CarNewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        CarRepository carRepository = (CarRepository) getArguments().getSerializable("repository");
+        carController = new CarController(carRepository, getView());
 
         Activity activity = this.getActivity();
         CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
@@ -60,8 +66,6 @@ public class CarNewFragment extends Fragment {
         etCarStatus = (EditText)view.findViewById(R.id.new_car_status);
         etCarType = (EditText)view.findViewById(R.id.new_car_type);
 
-        final CarController carController = new CarController();
-
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,18 +75,8 @@ public class CarNewFragment extends Fragment {
                 currentCar.setStatus(etCarStatus.getText().toString());
                 currentCar.setType(etCarType.getText().toString());
 
-                carController.addCar(currentCar).enqueue(new Callback<Car>() {
-                    @Override
-                    public void onResponse(Call<Car> call, Response<Car> response) {
-                        Log.d("New Car", response.body().toString());
-                        getActivity().finish();
-                    }
-
-                    @Override
-                    public void onFailure(Call<Car> call, Throwable t) {
-                        Snackbar.make(view, t.getLocalizedMessage(), Snackbar.LENGTH_LONG);
-                    }
-                });
+                carController.addCar(currentCar);
+                getActivity().finish();
             }
         });
     }

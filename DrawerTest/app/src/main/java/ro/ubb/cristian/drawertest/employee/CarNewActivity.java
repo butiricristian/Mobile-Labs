@@ -1,16 +1,17 @@
-package ro.ubb.cristian.drawertest;
+package ro.ubb.cristian.drawertest.employee;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
+import ro.ubb.cristian.drawertest.MainActivity;
+import ro.ubb.cristian.drawertest.R;
+import ro.ubb.cristian.drawertest.controller.CarController;
 import ro.ubb.cristian.drawertest.model.car.Car;
+import ro.ubb.cristian.drawertest.repository.CarRepository;
 
 /**
  * Created by crist on 29-Jan-18.
@@ -19,6 +20,7 @@ import ro.ubb.cristian.drawertest.model.car.Car;
 public class CarNewActivity extends AppCompatActivity {
 
     private Car currentCar;
+    private CarRepository carRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class CarNewActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         currentCar = new Car();
+        carRepository = (CarRepository) getIntent().getSerializableExtra("repository");
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -38,6 +41,7 @@ public class CarNewActivity extends AppCompatActivity {
             Bundle arguments = new Bundle();
             arguments.putSerializable(CarNewFragment.CAR,
                     currentCar);
+            arguments.putSerializable("repository", carRepository);
             CarNewFragment fragment = new CarNewFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

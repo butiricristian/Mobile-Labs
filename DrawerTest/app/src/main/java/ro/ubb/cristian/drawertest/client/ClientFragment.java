@@ -1,5 +1,6 @@
-package ro.ubb.cristian.drawertest.fragments;
+package ro.ubb.cristian.drawertest.client;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -23,19 +24,22 @@ import retrofit2.Response;
 import ro.ubb.cristian.drawertest.R;
 import ro.ubb.cristian.drawertest.controller.CarController;
 import ro.ubb.cristian.drawertest.model.car.Car;
-import ro.ubb.cristian.drawertest.model.car.CarAdapter;
 import ro.ubb.cristian.drawertest.net.NetworkUtil;
+import ro.ubb.cristian.drawertest.observer.Observer;
+import ro.ubb.cristian.drawertest.repository.CarRepository;
 
 /**
  * Created by crist on 28-Jan-18.
  */
 
-public class ClientFragment extends Fragment {
+public class ClientFragment extends Fragment implements Observer {
     RecyclerView recyclerView;
     List<Car> cars = new ArrayList<>();
     TextView noNetworkConnection;
     Button retryButton;
     ProgressBar progressBar;
+    CarRepository carRepository;
+    CarController carController;
 
     @Nullable
     @Override
@@ -44,24 +48,29 @@ public class ClientFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.client_car_list);
         noNetworkConnection = view.findViewById(R.id.no_connection_text);
         retryButton = view.findViewById(R.id.retry_button);
         progressBar = view.findViewById(R.id.progressBar);
+        getActivity().findViewById(R.id.fab).setVisibility(View.INVISIBLE);
+        final Activity a = getActivity();
 
-        checkConnection(view);
+        carRepository = new CarRepository();
+        carRepository.subscribe(this);
+        carController = new CarController(carRepository, a.findViewById(R.id.parent_layout));
 
+        checkConnection(a);
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkConnection(view);
+                checkConnection(a);
             }
         });
 
-        getActivity().setTitle("Client");
+        a.setTitle("Client");
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -73,10 +82,10 @@ public class ClientFragment extends Fragment {
 //        cars.add(new Car(5L, "Dacia", 10, "Logan", "selling"));
 //        cars.add(new Car(6L, "Caruta", 10, "Lux", "selling"));
 
-        recyclerView.setAdapter(new CarAdapter(getContext(), cars));
+        recyclerView.setAdapter(new ClientCarAdapter(getContext(), cars, carController));
     }
 
-    private void checkConnection(final View view){
+    private void checkConnection(final Activity a){
         progressBar.setVisibility(View.VISIBLE);
         if(NetworkUtil.isNetworkAvailable(getContext())){
             Log.d("Network", "Connection available");
@@ -84,21 +93,7 @@ public class ClientFragment extends Fragment {
             noNetworkConnection.setVisibility(View.INVISIBLE);
             retryButton.setVisibility(View.INVISIBLE);
 
-            CarController carController = new CarController();
-            carController.start().enqueue(new Callback<List<Car>>() {
-                @Override
-                public void onResponse(Call<List<Car>> call, Response<List<Car>> response) {
-                    cars = response.body();
-                    recyclerView.setAdapter(new CarAdapter(getContext(), cars));
-                    progressBar.setVisibility(View.INVISIBLE);
-                }
-
-                @Override
-                public void onFailure(Call<List<Car>> call, Throwable t) {
-                    Snackbar.make(view, t.getLocalizedMessage(), Snackbar.LENGTH_LONG).show();
-                    progressBar.setVisibility(View.INVISIBLE);
-                }
-            });
+            carController.getAvailableCars();
         }
         else{
             Log.d("Network", "Connection not available");
@@ -107,5 +102,12 @@ public class ClientFragment extends Fragment {
             retryButton.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.INVISIBLE);
         }
+    }
+
+    @Override
+    public void updateMe() {
+        cars = this.carRepository.getCars();
+        recyclerView.setAdapter(new ClientCarAdapter(getContext(), cars, carController));
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }

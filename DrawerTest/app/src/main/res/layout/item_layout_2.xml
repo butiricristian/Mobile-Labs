@@ -38,21 +38,14 @@
                 android:text="@string/car_type"
                 android:textSize="15sp" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/car_status"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <Button
-                    android:id="@+id/buy_button"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/colorWhite"
-                    android:shadowColor="@color/cardview_light_background"
-                    android:text="@string/buy"
-                    android:textColor="@color/colorPrimary"
-                    />
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:text="@string/car_status"
+                android:textSize="15sp" />
+
+
         </LinearLayout>
 
 

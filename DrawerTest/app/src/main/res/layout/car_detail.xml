@@ -66,10 +66,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Button"
         android:background="@color/colorRemove"
-        android:textColor="@color/colorWhite"
-        />"
+        android:text="Remove"
+        android:textColor="@color/colorWhite" />
 
 
     <!--<TextView-->

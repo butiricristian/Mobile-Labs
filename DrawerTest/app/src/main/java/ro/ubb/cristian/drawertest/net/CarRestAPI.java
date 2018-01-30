@@ -1,6 +1,7 @@
 package ro.ubb.cristian.drawertest.net;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -24,6 +25,9 @@ public interface CarRestAPI {
     Call<Car> addCar(@Body Car car);
 
     @POST("removeCar")
-    Call<Car> removeCar(@Body Long id);
+    Call<Car> removeCar(@Body Car id);
+
+    @POST("buyCar")
+    Call<Car> buyCar(@Body Map<String, String> car);
 
 }

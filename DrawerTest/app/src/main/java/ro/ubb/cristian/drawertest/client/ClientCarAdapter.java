@@ -1,13 +1,9 @@
-package ro.ubb.cristian.drawertest.model.car;
+package ro.ubb.cristian.drawertest.client;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,25 +11,33 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import ro.ubb.cristian.drawertest.CarDetailActivity;
-import ro.ubb.cristian.drawertest.CarDetailFragment;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import ro.ubb.cristian.drawertest.controller.CarController;
+import ro.ubb.cristian.drawertest.employee.CarDetailActivity;
+import ro.ubb.cristian.drawertest.employee.CarDetailFragment;
 import ro.ubb.cristian.drawertest.R;
-import ro.ubb.cristian.drawertest.dummy.DummyContent;
+import ro.ubb.cristian.drawertest.model.car.Car;
 
 /**
  * Created by crist on 28-Jan-18.
  */
 
-public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
+public class ClientCarAdapter extends RecyclerView.Adapter<ClientCarAdapter.CarViewHolder> {
 
     private Context mCtx;
     private List<Car> cars;
+    private CarController carController;
 
-    public CarAdapter(Context mCtx, List<Car> cars) {
+    public ClientCarAdapter(Context mCtx, List<Car> cars, CarController carController) {
         this.mCtx = mCtx;
         this.cars = cars;
+        this.carController = carController;
     }
 
     @Override
@@ -50,16 +54,16 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
         holder.textViewCarQuantity.setText("Quantity: " + car.getQuantity().toString());
         holder.textViewCarType.setText(car.getType());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Context context = view.getContext();
-                Intent intent = new Intent(context, CarDetailActivity.class);
-                intent.putExtra(CarDetailFragment.CAR, car);
-
-                context.startActivity(intent);
-            }
-        });
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Context context = view.getContext();
+//                Intent intent = new Intent(context, CarDetailActivity.class);
+//                intent.putExtra(CarDetailFragment.CAR, car);
+//
+//                context.startActivity(intent);
+//            }
+//        });
 
         holder.buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +83,10 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
 //                            }
 //                        });
 //                adBuilder.create().show();
-                Snackbar.make(view, "Not yet implemented", 1000).show();
+                Map<String, String> body = new HashMap<>();
+                body.put("id", car.getId().toString());
+                body.put("quantity", "1");
+                carController.buyCar(body);
             }
         });
 

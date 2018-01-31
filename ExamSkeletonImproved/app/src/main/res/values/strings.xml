@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Exam</string>
+    <string name="section1">Client</string>
+    <string name="section2">Employee</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_car_list">Cars</string>
+    <string name="title_car_detail">Car Detail</string>
+    <string name="title_car_new">New Car</string>
+    <string name="car_name">Car name</string>
+    <string name="car_quantity">Car quantity</string>
+    <string name="car_type">Car type</string>
+    <string name="car_status">Car status</string>
+    <string name="buy">Buy</string>
+    <string name="title_activity_employee">EmployeeActivity</string>
+    <string name="title_activity_client">ClientActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="retry">Retry</string>
+    <string name="title_activity_new_car">NewCarActivity</string>
+    <string name="title_activity_car_details">CarDetailsActivity</string>
+    <string name="all_cars">All Cars</string>
+    <string name="return_car">Return Car</string>
+    <string name="title_activity_section_one">SectionOne</string>
+</resources>

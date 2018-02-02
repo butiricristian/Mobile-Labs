@@ -13,17 +13,17 @@ import java.io.Serializable;
 public class Item implements Serializable{
     @PrimaryKey
     private Long id;
-    private Integer intField1;
-    private String stringField1;
-    private String stringField2;
-    private String stringField3;
+    private Integer quantity;
+    private String name;
+    private String type;
+    private String status;
 
-    public Item(Long id, Integer intField1, String stringField1, String stringField2, String stringField3) {
+    public Item(Long id, Integer quantity, String name, String type, String status) {
         this.id = id;
-        this.intField1 = intField1;
-        this.stringField1 = stringField1;
-        this.stringField2 = stringField2;
-        this.stringField3 = stringField3;
+        this.quantity = quantity;
+        this.name = name;
+        this.type = type;
+        this.status = status;
     }
 
     @Ignore
@@ -37,46 +37,46 @@ public class Item implements Serializable{
         this.id = id;
     }
 
-    public Integer getIntField1() {
-        return intField1;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setIntField1(Integer intField1) {
-        this.intField1 = intField1;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    public String getStringField1() {
-        return stringField1;
+    public String getName() {
+        return name;
     }
 
-    public void setStringField1(String stringField1) {
-        this.stringField1 = stringField1;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getStringField2() {
-        return stringField2;
+    public String getType() {
+        return type;
     }
 
-    public void setStringField2(String stringField2) {
-        this.stringField2 = stringField2;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getStringField3() {
-        return stringField3;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStringField3(String stringField3) {
-        this.stringField3 = stringField3;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
         return "Item{" +
                 "id=" + id +
-                ", intField1=" + intField1 +
-                ", stringField1='" + stringField1 + '\'' +
-                ", stringField2='" + stringField2 + '\'' +
-                ", stringField3='" + stringField3 + '\'' +
+                ", quantity=" + quantity +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

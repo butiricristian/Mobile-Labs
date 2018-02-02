@@ -32,13 +32,14 @@ public class NewCarActivity extends AppCompatActivity {
         etCarStatus = (EditText) findViewById(R.id.new_car_status);
         etCarType = (EditText) findViewById(R.id.new_car_type);
 
-        CarRepository carRepository = (CarRepository) getIntent().getExtras().getSerializable("repository");
-        carController = new CarController(carRepository, findViewById(R.id.parent_layout), null);
+        final CarRepository carRepository = (CarRepository) getIntent().getExtras().getSerializable("repository");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                carController = new CarController(view.getContext(), carRepository, view, null);
+
                 currentCar.setName(etCarName.getText().toString());
                 currentCar.setQuantity(Integer.valueOf(etCarQuantity.getText().toString()));
                 currentCar.setStatus(etCarStatus.getText().toString());

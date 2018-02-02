@@ -24,17 +24,81 @@
             android:label="@string/title_activity_section_one"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".section1.ItemListFragment"
-            android:label="@string/title_item_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".section1.ItemDetailActivity"
+            android:name=".section1.subSection1_1.ItemDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".section1.ItemListFragment"
+            android:parentActivityName=".section1.SectionOneActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ro.ubb.cristian.examskeletonimproved.section1.ItemListFragment" />
+                android:value=".section1.SectionOneActivity" />
+        </activity>
+        <activity
+            android:name=".section1.subSection1_1.ItemNewActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".section1.SectionOneActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".section1.SectionOneActivity" />
+        </activity>
+        <activity
+            android:name=".section1.subSection1_2.ItemDetailActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".section1.SectionOneActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".section1.SectionOneActivity" />
+        </activity>
+        <activity
+            android:name=".section1.subSection1_2.ItemNewActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".section1.SectionOneActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".section1.SectionOneActivity" />
+        </activity>
+
+        <activity
+            android:name=".section2.SectionTwoActivity"
+            android:label="@string/title_activity_section_one"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".section2.subSection2_1.ItemDetailActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".section2.SectionTwoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".section2.SectionTwoActivity" />
+        </activity>
+        <activity
+            android:name=".section2.subSection2_1.ItemNewActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".section2.SectionTwoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".section2.SectionTwoActivity" />
+        </activity>
+        <activity
+            android:name=".section2.subSection2_2.ItemDetailActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".section2.SectionTwoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".section2.SectionTwoActivity" />
+        </activity>
+        <activity
+            android:name=".section2.subSection2_2.ItemNewActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".section2.SectionTwoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".section2.SectionTwoActivity" />
         </activity>
     </application>
 

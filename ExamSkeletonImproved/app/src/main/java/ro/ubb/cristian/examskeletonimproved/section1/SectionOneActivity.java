@@ -1,11 +1,8 @@
 package ro.ubb.cristian.examskeletonimproved.section1;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import ro.ubb.cristian.examskeletonimproved.R;
+import ro.ubb.cristian.examskeletonimproved.controller.ControllerProvider;
+import ro.ubb.cristian.examskeletonimproved.database.DatabaseProvider;
+import ro.ubb.cristian.examskeletonimproved.section1.subSection1_1.ItemListFragment;
 
 public class SectionOneActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -48,6 +48,7 @@ public class SectionOneActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         lastUsedFragment = R.id.nav_item_list;
+        navigationView.setCheckedItem(lastUsedFragment);
         switchScreen(lastUsedFragment);
     }
 
@@ -98,6 +99,13 @@ public class SectionOneActivity extends AppCompatActivity
         if (id == R.id.nav_item_list) {
             fragment = new ItemListFragment();
             lastUsedFragment = R.id.nav_item_list;
+        } else if (id == R.id.nav_item_list_2) {
+            fragment = new ro.ubb.cristian.examskeletonimproved.section1.subSection1_2.ItemListFragment();
+            lastUsedFragment = R.id.nav_item_list_2;
+        }
+        else if(id == R.id.nav_clear_items){
+            DatabaseProvider.getDatabaseInstance(this).getCarDao().deleteAll();
+            ControllerProvider.getControllerInstance().notifyObservers();
 //            Bundle bundle = new Bundle();
 //            bundle.putSerializable("repository", carRepository);
 //            fragment.setArguments(bundle);
@@ -116,7 +124,7 @@ public class SectionOneActivity extends AppCompatActivity
 //            myCarRepository.notifyObservers();
         }
 
-        if(fragment != null) {
+        if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.screen_area, fragment);
             ft.commit();

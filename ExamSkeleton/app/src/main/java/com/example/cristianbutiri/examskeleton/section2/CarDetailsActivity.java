@@ -25,7 +25,7 @@ public class CarDetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         CarRepository carRepository = (CarRepository) getIntent().getExtras().getSerializable("repository");
-        carController = new CarController(carRepository, findViewById(R.id.parent_layout), null);
+        carController = new CarController(this, carRepository, getParent().findViewById(R.id.parent_layout), null);
 
         car = (Car) getIntent().getExtras().getSerializable("car");
 

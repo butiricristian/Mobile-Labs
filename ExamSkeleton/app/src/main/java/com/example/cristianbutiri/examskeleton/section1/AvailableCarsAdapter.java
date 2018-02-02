@@ -82,15 +82,6 @@ public class AvailableCarsAdapter extends RecyclerView.Adapter<AvailableCarsAdap
                 body.put("id", car.getId().toString());
                 body.put("quantity", "1");
                 carController.buyCar(body);
-//                AppDatabase database = DatabaseProvider.getDatabaseInstance(mCtx);
-//                CarDao carDao = database.getCarDao();
-//                Car car2 = new Car();
-//                car2.setId(car.getId());
-//                car2.setQuantity(1);
-//                car2.setName(car.getName());
-//                car2.setStatus(car.getStatus());
-//                car2.setType(car.getType());
-//                carDao.save(car);
             }
         });
 

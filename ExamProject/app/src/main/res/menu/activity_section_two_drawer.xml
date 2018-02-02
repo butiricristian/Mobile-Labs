@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_item_list"
+            android:title="List 1" />
+
+        <item
+            android:id="@+id/nav_item_list_2"
+            android:title="List 2" />
+
+        <!--<item-->
+            <!--android:id="@+id/nav_clear_cars"-->
+            <!--android:title="Clear my cars" />-->
+    </group>
+
+</menu>

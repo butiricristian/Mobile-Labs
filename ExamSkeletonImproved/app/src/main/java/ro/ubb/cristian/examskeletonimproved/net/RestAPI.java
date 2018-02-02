@@ -7,6 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import ro.ubb.cristian.examskeletonimproved.model.Item;
 
 /**
@@ -16,20 +17,23 @@ import ro.ubb.cristian.examskeletonimproved.model.Item;
 public interface RestAPI {
     @GET("cars")
     Call<List<Item>> getAvailableCars();
-//
-//    @GET("all")
-//    Call<List<Car>> getAllCars();
-//
-//    @POST("addCar")
-//    Call<Car> addCar(@Body Car car);
-//
-//    @POST("removeCar")
-//    Call<Car> removeCar(@Body Car id);
-//
-//    @POST("buyCar")
-//    Call<Car> buyCar(@Body Map<String, String> car);
-//
-//    @POST("returnCar")
-//    Call<Car> returnCar(@Body Car car);
+
+    @GET("all")
+    Call<List<Item>> getAllCars();
+
+    @POST("addCar")
+    Call<Item> addItem(@Body Item car);
+
+    @POST("removeCar")
+    Call<Item> removeCar(@Body Item id);
+
+    @POST("buyCar")
+    Call<Item> buyCar(@Body Map<String, String> car);
+
+    @POST("returnCar")
+    Call<Item> returnCar(@Body Item car);
+
+    @POST("updateCar")
+    Call<Item> updateItem(@Body Item car);
 
 }

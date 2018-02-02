@@ -9,6 +9,7 @@ import android.arch.persistence.room.Update;
 import java.util.List;
 
 import ro.ubb.cristian.examskeletonimproved.model.Item;
+import ro.ubb.cristian.examskeletonimproved.model.MyItem;
 
 
 /**

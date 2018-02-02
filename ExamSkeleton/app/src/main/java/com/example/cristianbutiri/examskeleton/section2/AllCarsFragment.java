@@ -49,7 +49,7 @@ public class AllCarsFragment extends Fragment implements Observer {
         carRepository = (CarRepository) getArguments().getSerializable("repository");
         carRepository.subscribe(this);
         Log.d("AllCars: ", "Subscribe");
-        carController = new CarController(carRepository, getActivity().findViewById(R.id.parent_layout), progressBar);
+        carController = new CarController(getContext(), carRepository, getActivity().findViewById(R.id.parent_layout), progressBar);
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.add_car);
         fab.setOnClickListener(new View.OnClickListener() {

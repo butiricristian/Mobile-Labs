@@ -8,13 +8,13 @@
             android:id="@+id/nav_item_list"
             android:title="Available Cars" />
 
-        <!--<item-->
-            <!--android:id="@+id/nav_my_cars"-->
-            <!--android:title="My Cars" />-->
+        <item
+            android:id="@+id/nav_item_list_2"
+            android:title="My Cars" />
 
-        <!--<item-->
-            <!--android:id="@+id/nav_clear_cars"-->
-            <!--android:title="Clear my cars" />-->
+        <item
+            android:id="@+id/nav_clear_items"
+            android:title="Clear items" />
     </group>
 
 </menu>

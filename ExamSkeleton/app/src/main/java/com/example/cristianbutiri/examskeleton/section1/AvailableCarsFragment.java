@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.cristianbutiri.examskeleton.R;
 import com.example.cristianbutiri.examskeleton.controller.CarController;
+import com.example.cristianbutiri.examskeleton.net.MyWebSocketClient;
 import com.example.cristianbutiri.examskeleton.net.NetworkUtil;
 import com.example.cristianbutiri.examskeleton.observer.Observer;
 import com.example.cristianbutiri.examskeleton.repository.CarRepository;
@@ -53,7 +54,7 @@ public class AvailableCarsFragment extends Fragment implements Observer {
         if(getArguments().containsKey("repository")) {
             carRepository = (CarRepository) getArguments().getSerializable("repository");
             carRepository.subscribe(this);
-            carController = new CarController(carRepository, getActivity().findViewById(R.id.parent_layout), progressBar);
+            carController = new CarController(getContext(), carRepository, getActivity().findViewById(R.id.parent_layout), progressBar);
         }
 
         checkConnection();
@@ -64,6 +65,8 @@ public class AvailableCarsFragment extends Fragment implements Observer {
                 checkConnection();
             }
         });
+
+        startWS();
     }
 
     private void checkConnection(){
@@ -89,5 +92,10 @@ public class AvailableCarsFragment extends Fragment implements Observer {
     public void updateMe() {
         Log.d("AvailableCars: ", "Update cars' list");
         recyclerView.setAdapter(new AvailableCarsAdapter(getContext(), this.carRepository.getCars(), carController));
+    }
+
+    private void startWS(){
+        MyWebSocketClient ws = new MyWebSocketClient(carController);
+        ws.connect();
     }
 }

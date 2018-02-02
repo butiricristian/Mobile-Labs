@@ -26,6 +26,7 @@ public class ClientActivity extends AppCompatActivity
 
     Integer lastUsedFragment;
     CarRepository carRepository;
+    CarRepository myCarRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class ClientActivity extends AppCompatActivity
 //        });
 
         carRepository = new CarRepository();
+        myCarRepository = new CarRepository();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -106,20 +108,25 @@ public class ClientActivity extends AppCompatActivity
         if (id == R.id.nav_available_cars) {
             fragment = new AvailableCarsFragment();
             lastUsedFragment = R.id.nav_available_cars;
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("repository", carRepository);
+            fragment.setArguments(bundle);
 
         } else if (id == R.id.nav_my_cars) {
             fragment = new MyCarsFragment();
             lastUsedFragment = R.id.nav_my_cars;
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("repository", myCarRepository);
+            fragment.setArguments(bundle);
         } else if (id == R.id.nav_clear_cars){
             AppDatabase database = DatabaseProvider.getDatabaseInstance(this);
             CarDao carDao = database.getCarDao();
             carDao.deleteAll();
+            myCarRepository.setCars(carDao.findAll());
+            myCarRepository.notifyObservers();
         }
 
         if(fragment != null) {
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("repository", carRepository);
-            fragment.setArguments(bundle);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.screen_area, fragment);
             ft.commit();
